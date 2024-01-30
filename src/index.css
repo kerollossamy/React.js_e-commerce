@@ -1,0 +1,132 @@
+body {
+  background-color: #454545 !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+/* NotFound Page */
+#notfound-h2 {
+  color: #ff5d5d;
+}
+
+#notfound-p {
+  color: #ffffff;
+  font-size: 1.5em;
+}
+
+#notfound-div {
+  margin-top: 30vh;
+  height: 100vh;
+  text-align: center;
+}
+
+.navbar {
+  background-color: #1e1e1e;
+  font-size: 1.2em;
+}
+
+.nav-link {
+  color: #ffffff;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+  font-weight: 600 !important;
+  width: fit-content;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.nav-link:hover {
+  background-color: rgb(201, 201, 201);
+  color: #191717 !important;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+}
+
+.product-card {
+  background-color: #ccc !important;
+  color: #191717 !important;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  transform: scale(1.05);
+}
+
+.productimage {
+  border-radius: 10px;
+  height: 100% !important;
+  object-fit: cover;
+  transition: 0.3s ease;
+}
+
+.productimage:hover {
+  transform: scale(1.025);
+}
+
+.product-image {
+  border-radius: 10px;
+  height: 100% !important;
+  transition: 0.3s ease;
+}
+
+.product-image:hover {
+  transform: scale(1.025);
+}
+
+/* Search text-input */
+.custom-input-dark {
+  background-color: #353535 !important;
+  padding: 6px 15px !important;
+  color: #ccc !important;
+}
+
+.custom-input-dark::placeholder {
+  color: #ccc !important;
+}
+
+.custom-select-dark {
+  color: #ccc !important;
+  background-color: #353535 !important;
+  width: 100% !important;
+}
+
+p {
+  margin: 0 !important;
+}
+
+/* Favorites Badge */
+.custom-badge {
+  background-color: #2576ac;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #fff;
+  padding: 0 10px;
+  user-select: none;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.language-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.fa-star {
+  color: #ffa41c;
+  font-size: 1.2rem;
+}
+
+.fas {
+  transition: all 0.5s ease;
+}
+
+.fa-shopping-cart:hover {
+  transform: translateY(-10px);
+  transform: scale(1.3);
+}
+
+.fa-shopping-cart:hover {
+  transform: none;
+}
