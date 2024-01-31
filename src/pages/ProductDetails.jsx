@@ -1,16 +1,41 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Container, Card, Col, Row, Image } from "react-bootstrap";
 import StarsMeter from "../components/StarMeter";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../store/actions/ToggleFavorite";
 
 const ProductsDetails = () => {
   const { productID } = useParams();
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
+  const favorites = useSelector((state) => state.favorites.favorites);
 
   const product = products.find(
     (product) => product.id === parseInt(productID)
   );
+
+  const isFavorite = favorites.some(
+    (favProduct) => favProduct.id === product.id
+  );
+
+  const handleFavoritesClick = () => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(product.id));
+    } else {
+      dispatch(
+        addToFavorites({
+          id: product.id,
+          thumbnail: product.thumbnail,
+          title: product.title,
+          rating: product.rating,
+        })
+      );
+    }
+  };
 
   if (!product) {
     return (
@@ -27,12 +52,31 @@ const ProductsDetails = () => {
           md={6}
           className="d-flex align-items-center justify-content-center"
         >
-          <Image
-            className="product-image"
-            src={product.thumbnail}
-            alt={product.title}
-            fluid
-          />
+          <div className="position-relative">
+            <Image
+              className="product-image"
+              src={
+                product.thumbnail ||
+                `${process.env.PUBLIC_URL}/image-notfound.jpg`
+              }
+              alt={product.title}
+              fluid
+            />
+            <div
+              className="favorites-icon"
+              onClick={handleFavoritesClick}
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "15px",
+                cursor: "pointer",
+                fontSize: "2rem",
+                color: isFavorite ? "#dc3545" : "#dc3545",
+              }}
+            >
+              <i className={`fas fa-heart${isFavorite ? "" : "-broken"}`}></i>
+            </div>
+          </div>
         </Col>
         <Col md={6}>
           <Card className="bg-dark text-light px-2">
@@ -78,7 +122,7 @@ const ProductsDetails = () => {
               <Col className="mb-3" key={index} md={4}>
                 <Image
                   className="productimage"
-                  src={image}
+                  src={image || `${process.env.PUBLIC_URL}/image-notfound.jpg`}
                   alt={`Image ${index + 1}`}
                   fluid
                 />

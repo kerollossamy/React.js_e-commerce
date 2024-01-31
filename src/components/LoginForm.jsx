@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,6 +47,24 @@ const LoginForm = () => {
 
   const onSubmitFunc = (e) => {
     e.preventDefault();
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const foundUser = users.find((user) => user.email === email);
+
+    if (foundUser) {
+      const currentUsers =
+        JSON.parse(localStorage.getItem("currentUser")) || [];
+      currentUsers.push(foundUser.name);
+      localStorage.setItem("currentUser", JSON.stringify(currentUsers));
+
+      navigate("/products");
+    } else {
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 3000);
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -50,7 +72,17 @@ const LoginForm = () => {
   return (
     <Container>
       <Row className="justify-content-md-center mt-3">
-        <Col md={5}>
+        <Col md={6}>
+          {alertVisible && (
+            <Alert
+              variant="danger"
+              onClose={() => setAlertVisible(false)}
+              dismissible
+            >
+              Invalid Information. If you don't have an account, please sign up
+              first.
+            </Alert>
+          )}
           <Form onSubmit={onSubmitFunc}>
             <Form.Group>
               <Form.Label className="text-light mt-3">Email:</Form.Label>
@@ -95,6 +127,9 @@ const LoginForm = () => {
             >
               Login
             </Button>
+            <div className="text-light">
+              Don't have an account? <Link style={{ textDecoration: "none" }} to="/signup"><b>Sign Up</b></Link>
+            </div>
           </Form>
         </Col>
       </Row>

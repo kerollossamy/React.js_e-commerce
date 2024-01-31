@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem("users")) || []
+  );
+
+  const [alertVisible, setAlertVisible] = useState(false);
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -32,6 +40,13 @@ const RegistrationForm = () => {
 
   const checkConfirmPassword = (confirmPassword) => {
     return confirmPassword === password;
+  };
+
+  const showAlert = () => {
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000);
   };
 
   const handleEmailChange = (e) => {
@@ -101,17 +116,42 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !name || !username || !password || !confirmPassword) {
+      showAlert();
+      return;
+    }
+
+    const newUser = { email, name, username, password };
+    setUsers([...users, newUser]);
+    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+
+    const currentUsers = JSON.parse(localStorage.getItem("currentUser")) || [];
+    currentUsers.push(name);
+    localStorage.setItem("currentUser", JSON.stringify(currentUsers));
+
     setEmail("");
     setName("");
     setUsername("");
     setPassword("");
     setConfirmPassword("");
+
+    navigate("/products");
   };
 
   return (
     <Container>
       <Row className="justify-content-md-center mt-3">
-        <Col md={5}>
+        <Col md={6}>
+          {alertVisible && (
+            <Alert
+              variant="danger"
+              onClose={() => setAlertVisible(false)}
+              dismissible
+            >
+              You must fill all the fields.
+            </Alert>
+          )}
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label className="text-light mt-3">Email:</Form.Label>
@@ -192,8 +232,14 @@ const RegistrationForm = () => {
                 !!confirmPasswordError
               }
             >
-              Register
+              Sign Up
             </Button>
+            <div className="text-light">
+              Already have an account?{" "}
+              <Link style={{ textDecoration: "none" }} to="/login">
+                <b>Log in</b>
+              </Link>
+            </div>
           </Form>
         </Col>
       </Row>
