@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getProducts } from "../store/actions/getProducts";
 import { searchProducts } from "../store/actions/searchProducts";
 import { getProductsByCategory } from "../store/actions/getProductByCategory";
 import { getCategories } from "../store/actions/getCategories";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../store/actions/ToggleFavorite";
+import { addToFavorites, removeFromFavorites } from "../store/actions/ToggleFavorite";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -19,6 +16,9 @@ const ProductList = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     dispatch(getProducts());
@@ -33,12 +33,19 @@ const ProductList = () => {
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
+    setCurrentPage(1);
     if (category) {
       dispatch(getProductsByCategory(category));
     } else {
       dispatch(getProducts());
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Container>
@@ -77,7 +84,7 @@ const ProductList = () => {
         </Row>
       </Form>
       <Row>
-        {products.map((product) => (
+        {currentItems.map((product) => (
           <Col key={product.id} sm={6} md={4} lg={3} xl={3}>
             <Card className="mb-4 product-card">
               <Link
@@ -99,8 +106,8 @@ const ProductList = () => {
                   className={`fas fa-heart${favoritesArr.some(
                     (favproduct) => favproduct.id === product.id
                   )
-                      ? " text-danger"
-                      : "-broken text-danger"
+                    ? " text-danger"
+                    : "-broken text-danger"
                     }`}
                   style={{
                     cursor: "pointer",
@@ -137,6 +144,19 @@ const ProductList = () => {
           </Col>
         ))}
       </Row>
+      <Pagination className="justify-content-center">
+        {Array.from({ length: Math.ceil(products.length / itemsPerPage) }).map(
+          (_, index) => (
+            <Pagination.Item
+              key={index + 1}
+              active={index + 1 === currentPage}
+              onClick={() => paginate(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          )
+        )}
+      </Pagination>
     </Container>
   );
 };
