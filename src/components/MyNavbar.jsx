@@ -3,9 +3,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../store/actions/ToggleCart";
 
 function MyNavbar() {
+  const dispatch = useDispatch();
   const favoritesCount = useSelector(
     (state) => state.favorites.favoritesCount || 0
   );
@@ -19,6 +21,7 @@ function MyNavbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    dispatch(clearCart());
     localStorage.setItem("currentUser", JSON.stringify([]));
     navigate("/");
   };
