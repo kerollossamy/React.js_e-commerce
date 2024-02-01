@@ -6,7 +6,11 @@ import { addToFavorites, removeFromFavorites } from "../store/actions/ToggleFavo
 
 const CartList = () => {
     const dispatch = useDispatch();
+    const favorites = useSelector((state) => state.favorites.favorites);
     const cartItems = useSelector((state) => state.cart.cartItems);
+    const totalPrice = cartItems.reduce((sum, product) => sum + product.price, 0);
+    const taxes = 0.1;
+    const totalWithTaxes = totalPrice + totalPrice * taxes;
 
     return (
         <Container fluid>
@@ -41,9 +45,9 @@ const CartList = () => {
                                         style={{ height: "200px", objectFit: "cover" }}
                                     />
                                 </Link>
-                                <div className="cartItems-icon">
+                                <div className="favorites-icon">
                                     <i
-                                        className={`fas fa-heart${cartItems.some(
+                                        className={`fas fa-heart${favorites.some(
                                             (favproduct) => favproduct.id === product.id
                                         )
                                             ? " text-danger"
@@ -57,7 +61,7 @@ const CartList = () => {
                                             fontSize: "2rem",
                                         }}
                                         onClick={() =>
-                                            cartItems.some(
+                                            favorites.some(
                                                 (favproduct) => favproduct.id === product.id
                                             )
                                                 ? dispatch(removeFromFavorites(product.id))
@@ -84,6 +88,20 @@ const CartList = () => {
                         </Col>
                     ))}
                 </Row>
+            )}
+            {cartItems.length > 0 && (
+                <div className="text-right mt-4">
+                    <p className="text-light">
+                        <b>Total Price:</b> ${totalPrice.toFixed(2)}
+                    </p>
+                    <p className="text-light">
+                        <b>Taxes:</b> 10%
+                    </p>
+                    <hr className="bg-light" />
+                    <h4 className="text-light">
+                        <b>Total with Taxes:</b> ${(totalWithTaxes).toFixed(2)}
+                    </h4>
+                </div>
             )}
         </Container>
     );
