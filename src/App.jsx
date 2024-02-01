@@ -9,6 +9,7 @@ import LoginForm from "./components/LoginForm";
 import ProductList from "./pages/ProductList";
 import ProductsDetails from "./pages/ProductDetails";
 import FavoritesList from './pages/FavoritesList';
+import CartList from "./pages/CartList";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/products" element={<ProductList />} />
           <Route path="/favorites" element={<FavoritesList />} />
           <Route path="/products/:productID" element={<ProductsDetails />} />
-          {/* <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/cart" element={<CartList />} />
           <Route path="/signup" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="*" element={<PageNotFound />} />

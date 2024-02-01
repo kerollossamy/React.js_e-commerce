@@ -2,10 +2,7 @@ import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../store/actions/ToggleFavorite";
+import { removeFromFavorites } from "../store/actions/ToggleFavorite";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
@@ -46,13 +43,12 @@ const FavoritesList = () => {
                 </Link>
                 <div className="favorites-icon">
                   <i
-                    className={`fas fa-heart${
-                      favorites.some(
-                        (favproduct) => favproduct.id === product.id
-                      )
-                        ? " text-danger"
-                        : "-broken text-danger"
-                    }`}
+                    className={`fas fa-heart${favorites.some(
+                      (favproduct) => favproduct.id === product.id
+                    )
+                      ? " text-danger"
+                      : "-broken text-danger"
+                      }`}
                     style={{
                       cursor: "pointer",
                       position: "absolute",
@@ -64,15 +60,7 @@ const FavoritesList = () => {
                       favorites.some(
                         (favproduct) => favproduct.id === product.id
                       )
-                        ? dispatch(removeFromFavorites(product.id))
-                        : dispatch(
-                            addToFavorites({
-                              id: product.id,
-                              thumbnail: product.thumbnail,
-                              title: product.title,
-                              rating: product.rating,
-                            })
-                          )
+                      && dispatch(removeFromFavorites(product.id))
                     }
                   ></i>
                 </div>

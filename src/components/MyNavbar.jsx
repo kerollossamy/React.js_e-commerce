@@ -10,6 +10,10 @@ function MyNavbar() {
     (state) => state.favorites.favoritesCount || 0
   );
 
+  const cartCount = useSelector(
+    (state) => state.cart.cartCount || 0
+  );
+
   const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
 
   const navigate = useNavigate();
@@ -40,9 +44,12 @@ function MyNavbar() {
             <Nav.Link className="text-light" as={Link} to="/cart">
               Cart
             </Nav.Link>
+            {cartCount > 0 && (
+              <span className="custom-badge my-2">{`${cartCount}`}</span>
+            )}
           </Nav>
           <Nav className="ml-auto">
-            {currentUser[0] ? (
+            {currentUser.length > 0 ? (
               <>
                 <Nav.Link className="text-light" as={Link} to="/">
                   Welcome, {currentUser[0]}

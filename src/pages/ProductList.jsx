@@ -96,13 +96,12 @@ const ProductList = () => {
               </Link>
               <div className="favorites-icon">
                 <i
-                  className={`fas fa-heart${
-                    favoritesArr.some(
-                      (favproduct) => favproduct.id === product.id
-                    )
+                  className={`fas fa-heart${favoritesArr.some(
+                    (favproduct) => favproduct.id === product.id
+                  )
                       ? " text-danger"
                       : "-broken text-danger"
-                  }`}
+                    }`}
                   style={{
                     cursor: "pointer",
                     position: "absolute",
@@ -116,13 +115,14 @@ const ProductList = () => {
                     )
                       ? dispatch(removeFromFavorites(product.id))
                       : dispatch(
-                          addToFavorites({
-                            id: product.id,
-                            thumbnail: product.thumbnail,
-                            title: product.title,
-                            rating: product.rating,
-                          })
-                        )
+                        addToFavorites({
+                          id: product.id,
+                          thumbnail: product.thumbnail,
+                          title: product.title,
+                          rating: product.rating,
+                          price: product.price,
+                        })
+                      )
                   }
                 ></i>
               </div>
