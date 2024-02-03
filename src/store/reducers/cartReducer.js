@@ -1,9 +1,9 @@
-const initialState = {
+const INITIAL_VALUE = {
     cartItems: [],
     cartCount: 0,
 };
 
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = INITIAL_VALUE, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             return {

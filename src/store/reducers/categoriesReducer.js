@@ -1,9 +1,9 @@
-const initialState = {
+const INITIAL_VALUE = {
     categories: [],
     error: null,
 };
 
-const categoriesReducer = (state = initialState, action) => {
+const categoriesReducer = (state = INITIAL_VALUE, action) => {
     switch (action.type) {
         case 'FETCH_CATEGORIES_SUCCESS':
             return {

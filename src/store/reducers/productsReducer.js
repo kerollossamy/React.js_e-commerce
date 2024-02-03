@@ -1,9 +1,9 @@
-const initialState = {
+const INITIAL_VALUE = {
     products: [],
     error: null,
 };
 
-const productsReducer = (state = initialState, action) => {
+const productsReducer = (state = INITIAL_VALUE, action) => {
     switch (action.type) {
         case 'FETCH_PRODUCTS_SUCCESS':
             return {

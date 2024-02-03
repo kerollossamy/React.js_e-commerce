@@ -137,6 +137,24 @@ p {
   transform: none;
 }
 
-Link {
-  text-decoration: none !important;
+.alert-container {
+  position: relative !important;
+  text-align: center;
+}
+
+.custom-alert-signin,
+.custom-alert-signup {
+  position: absolute !important;
+  font-weight: 600;
+  padding: 10px !important;
+}
+
+.custom-alert-signup {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+
+.custom-alert-signin {
+  transform: translateY(-80%);
 }

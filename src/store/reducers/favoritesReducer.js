@@ -1,10 +1,10 @@
-const initialState = {
+const INITIAL_VALUE = {
     favorites: [],         // Array to store favorite products
     favoritesCount: 0,     // Count of favorite products
 };
 
 // Redux reducer for handling state changes related to product favorites
-const favoritesReducer = (state = initialState, action) => {
+const favoritesReducer = (state = INITIAL_VALUE, action) => {
     switch (action.type) {
         // Action type for adding a product to favorites
         case 'ADD_TO_FAVORITES':

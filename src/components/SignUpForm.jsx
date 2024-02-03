@@ -141,16 +141,17 @@ const RegistrationForm = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center mt-3">
+      <Row className="justify-content-md-center mt-5">
         <Col md={6}>
           {alertVisible && (
-            <Alert
-              variant="danger"
-              onClose={() => setAlertVisible(false)}
-              dismissible
-            >
-              You must fill all the fields.
-            </Alert>
+            <div className="alert-container">
+              <Alert
+                className="custom-alert-signup"
+                variant="danger"
+              >
+                You must fill all the fields.
+              </Alert>
+            </div>
           )}
           <Form onSubmit={handleSubmit}>
             <Form.Group>

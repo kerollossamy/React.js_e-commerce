@@ -1,6 +1,7 @@
 import api from "./Api";
 import { fetchCategoriesFailure, fetchCategoriesSuccess } from "./fetches";
 
+// fetch all categories
 export const getCategories = () => {
     return (dispatch) => {
         return api

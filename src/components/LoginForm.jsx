@@ -49,15 +49,15 @@ const LoginForm = () => {
     e.preventDefault();
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const foundUser = users.find((user) => user.email === email);
+    const foundUser = users.find((user) => user.email === email && user.password === password);
 
     if (foundUser) {
-      const currentUsers =
-        JSON.parse(localStorage.getItem("currentUser")) || [];
+      const currentUsers = JSON.parse(localStorage.getItem("currentUser")) || [];
       currentUsers.push(foundUser.name);
       localStorage.setItem("currentUser", JSON.stringify(currentUsers));
 
       navigate("/products");
+
     } else {
       setAlertVisible(true);
       setTimeout(() => {
@@ -71,17 +71,16 @@ const LoginForm = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center mt-3">
-        <Col md={6}>
+      <Row className="justify-content-md-center mt-5">
+        <Col xs={12} md={8} lg={6} xl={5}>
           {alertVisible && (
-            <Alert
-              variant="danger"
-              onClose={() => setAlertVisible(false)}
-              dismissible
-            >
-              Invalid Information. If you don't have an account, please sign up
-              first.
-            </Alert>
+            <div className="alert-container">
+              <Alert
+                variant="danger" className="custom-alert-signin"
+              >
+                Invalid Information. If you don't have an account, please sign up first.
+              </Alert>
+            </div>
           )}
           <Form onSubmit={onSubmitFunc}>
             <Form.Group>
@@ -123,7 +122,7 @@ const LoginForm = () => {
               className="my-3"
               variant="primary"
               type="submit"
-              disabled={!!emailError || !!passwordError}
+              disabled={!!emailError || !!passwordError || email === "" || password === ""}
             >
               Login
             </Button>
