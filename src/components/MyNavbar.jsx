@@ -27,7 +27,7 @@ function MyNavbar() {
   };
 
   return (
-    <Navbar expand="lg" className="navbar">
+    <Navbar expand="lg" className="navbar" fixed="top">
       <Container>
         <Navbar.Brand className="text-light font-weight-bold" as={Link} to="/">
           <i className="fas fa-shopping-cart"></i> <b>e-commerce</b>
