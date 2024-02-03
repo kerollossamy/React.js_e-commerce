@@ -15,10 +15,10 @@ const FavoritesList = () => {
       </h1>
       {favorites.length === 0 ? (
         <div className="text-center my-2">
-          <h4 className="my-3 text-danger">
+          <h4 className="my-4 text-danger">
             Oh no, Your Favorites List is Empty.
           </h4>
-          <Link to="/products" className="btn btn-outline-info btn-lg my-2">
+          <Link to="/products" className="btn btn-outline-info btn-lg my-3">
             <b>Browse Products</b>
           </Link>
         </div>
@@ -29,7 +29,6 @@ const FavoritesList = () => {
               <Card className="mb-4 product-card">
                 <Link
                   to={`/products/${product.id}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <Card.Img
                     variant="top"

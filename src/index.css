@@ -1,14 +1,10 @@
 body {
-  background-color: #454545 !important;
+  background-color: #252728 !important;
   font-family: "Roboto", sans-serif !important;
   padding-top: 5%;
 }
 
 /* NotFound Page */
-#notfound-h2 {
-  color: #ff5d5d;
-}
-
 #notfound-p {
   color: #ffffff;
   font-size: 1.5em;
@@ -42,6 +38,7 @@ body {
   transition: all 0.5s ease;
 }
 
+/* Products List */
 .product-card {
   background-color: #ccc !important;
   color: #191717 !important;
@@ -54,25 +51,26 @@ body {
   transform: scale(1.05);
 }
 
-.productimage {
+/* Product Details */
+.product-image {
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.productAddImage {
   border-radius: 10px;
   height: 100% !important;
   object-fit: cover;
   transition: 0.3s ease;
 }
 
-.productimage:hover {
-  transform: scale(1.025);
-}
-
-.product-image {
-  border-radius: 10px;
-  height: 100% !important;
-  transition: 0.3s ease;
-}
-
+.productAddImage:hover,
 .product-image:hover {
   transform: scale(1.025);
+}
+
+.cart-button {
+  transition: 0.5s ease !important;
 }
 
 /* Search text-input */
@@ -138,13 +136,15 @@ p {
   transform: none;
 }
 
+/* Alerts */
 .alert-container {
   position: relative !important;
   text-align: center;
 }
 
 .custom-alert-signin,
-.custom-alert-signup {
+.custom-alert-signup,
+.custom-alert {
   position: absolute !important;
   font-weight: 600;
   padding: 10px !important;
@@ -158,4 +158,8 @@ p {
 
 .custom-alert-signin {
   transform: translateY(-80%);
+}
+
+.custom-alert {
+  transform: translateX(140%);
 }

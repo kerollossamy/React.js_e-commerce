@@ -142,14 +142,14 @@ const RegistrationForm = () => {
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
-        <Col md={6}>
+        <Col xs={12} md={8} lg={6} xl={5}>
           {alertVisible && (
             <div className="alert-container">
               <Alert
                 className="custom-alert-signup"
                 variant="danger"
               >
-                You must fill all the fields.
+                <i class="fa-solid fa-circle-exclamation"></i> You must fill all the fields.
               </Alert>
             </div>
           )}

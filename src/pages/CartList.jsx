@@ -9,8 +9,7 @@ const CartList = () => {
     const favorites = useSelector((state) => state.favorites.favorites);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const totalPrice = cartItems.reduce((sum, product) => sum + product.price, 0);
-    const taxes = 0.1;
-    const totalWithTaxes = totalPrice + totalPrice * taxes;
+    const totalWithTaxes = totalPrice + (totalPrice * 0.1);
 
     return (
         <Container fluid>
@@ -19,10 +18,10 @@ const CartList = () => {
             </h1>
             {cartItems.length === 0 ? (
                 <div className="text-center my-2">
-                    <h4 className="my-3 text-danger">
+                    <h4 className="my-4 text-danger">
                         Your cart is Empty.
                     </h4>
-                    <Link to="/products" className="btn btn-outline-info btn-lg my-2">
+                    <Link to="/products" className="btn btn-outline-info btn-lg my-3">
                         <b>Browse Products</b>
                     </Link>
                 </div>
@@ -33,7 +32,6 @@ const CartList = () => {
                             <Card className="mb-4 product-card">
                                 <Link
                                     to={`/products/${product.id}`}
-                                    style={{ textDecoration: "none", color: "inherit" }}
                                 >
                                     <Card.Img
                                         variant="top"
@@ -90,14 +88,14 @@ const CartList = () => {
                 </Row>
             )}
             {cartItems.length > 0 && (
-                <div className="text-right mt-4">
+                <div className="text-right mb-5 mt-2">
                     <p className="text-light">
                         <b>Total Price:</b> ${totalPrice.toFixed(2)}
                     </p>
                     <p className="text-light">
                         <b>Taxes:</b> 10%
                     </p>
-                    <hr className="bg-light" />
+                    <hr className="text-light" />
                     <h4 className="text-light">
                         <b>Total with Taxes:</b> ${(totalWithTaxes).toFixed(2)}
                     </h4>

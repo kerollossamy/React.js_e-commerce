@@ -4,11 +4,11 @@ import categoriesReducer from './categoriesReducer';
 import favoritesReducer from './favoritesReducer';
 import cartReducer from './cartReducer';
 
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
     products: productsReducer,
     categories: categoriesReducer,
     favorites: favoritesReducer,
     cart: cartReducer
 });
 
-export default rootReducer;
+export default combinedReducer;

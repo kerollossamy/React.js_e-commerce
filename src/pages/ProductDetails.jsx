@@ -74,13 +74,12 @@ const ProductsDetails = () => {
   return (
     <Container fluid className="my-4 product-container p-4">
       <Row>
-        <Col
-          md={6}
+        <Col md={12} lg={6}
           className="d-flex align-items-center justify-content-center"
         >
           <div className="position-relative">
             <Image
-              className="product-image"
+              className="product-image my-3"
               src={
                 product.thumbnail ||
                 `${process.env.PUBLIC_URL}/image-notfound.jpg`
@@ -92,58 +91,62 @@ const ProductsDetails = () => {
               onClick={handleFavoritesClick}
               style={{
                 position: "absolute",
-                top: "15px",
+                top: "20px",
                 right: "15px",
                 cursor: "pointer",
                 fontSize: "2rem",
-                color: isFavorite ? "#dc3545" : "#dc3545",
               }}
             >
-              <i className={`fas fa-heart${isFavorite ? "" : "-broken"}`}></i>
+              <i className={`fas fa-heart${isFavorite ? " text-danger" : "-broken text-danger"}`}></i>
             </div>
           </div>
         </Col>
-        <Col md={6}>
+
+        <Col md={12} lg={6}>
           <Card className="bg-dark text-light px-2">
             <Card.Body>
-              <Alert variant="danger" show={showAlert} onClose={() => setShowAlert(false)} dismissible>
-                Please sign in first.
+
+              <Alert variant="danger custom-alert" show={showAlert}>
+                <i class="fa-solid fa-circle-exclamation"></i>  Please sign in first.
               </Alert>
-              <Card.Title className="display-5 mb-4">
+              
+              <Card.Title className="display-5 mb-2">
                 {product.title}
               </Card.Title>
-              <Card.Text className="mb-3">
+              <hr />
+              <Card.Text className="mb-2">
                 <b>Description:</b> {product.description}
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Price:</b> ${product.price}
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Discount:</b> {product.discountPercentage}%
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Rating:</b> {product.rating}
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <StarsMeter vote={product.rating} />
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Stock:</b> {product.stock}
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Brand:</b> {product.brand}
               </Card.Text>
-              <Card.Text className="mb-3">
+              <Card.Text className="mb-2">
                 <b>Category:</b> {product.category}
               </Card.Text>
+
               <Button
                 variant={isItemInCart ? "danger" : "success"}
                 onClick={handleCartClick}
                 className="cart-button"
                 style={{
                   position: "absolute",
-                  bottom: "15px",
-                  right: "15px",
+                  bottom: "20px",
+                  right: "20px",
                 }}
               >
                 {isItemInCart ? "Remove from Cart" : "Add to Cart"}
@@ -161,7 +164,7 @@ const ProductsDetails = () => {
             {product.images.map((image, index) => (
               <Col className="mb-3" key={index} md={4}>
                 <Image
-                  className="productimage"
+                  className="productAddImage"
                   src={image || `${process.env.PUBLIC_URL}/image-notfound.jpg`}
                   alt={`Image ${index + 1}`}
                   fluid

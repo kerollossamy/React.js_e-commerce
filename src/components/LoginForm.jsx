@@ -78,7 +78,7 @@ const LoginForm = () => {
               <Alert
                 variant="danger" className="custom-alert-signin"
               >
-                Invalid Information. If you don't have an account, please sign up first.
+               <i class="fa-solid fa-circle-exclamation"></i> Invalid Information. If you don't have an account, please sign up first.
               </Alert>
             </div>
           )}
@@ -106,7 +106,7 @@ const LoginForm = () => {
               />
               <Button
                 className={
-                  showPassword ? "btn btn-success mt-2" : "btn btn-danger mt-2"
+                  showPassword ? "btn btn-success mt-3" : "btn btn-danger mt-3"
                 }
                 onClick={() => setShowPassword(!showPassword)}
               >
