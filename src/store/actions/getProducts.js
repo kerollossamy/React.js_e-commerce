@@ -4,7 +4,7 @@ import { fetchProductsFailure, fetchProductsSuccess } from "./fetches";
 export const getProducts = () => {
   return (dispatch) => {
     return api
-      .get('/products')
+      .get('/products?limit=100')
       .then((response) => {
         dispatch(fetchProductsSuccess(response.data));
       })
